@@ -19,7 +19,7 @@ func legacyArgs(cmd *Command, args []string) error {
 
 	// root command with subcommands, do subcommand checking.
 	if !cmd.HasParent() && len(args) > 0 {
-		return fmt.Errorf("unknown command %q for %q%s", args[0], cmd.CommandPath(), cmd.findSuggestions(args[0]))
+		return fmt.Errorf("unknown command %q %s", args[0], cmd.findSuggestions(args[0]))
 	}
 	return nil
 }
@@ -27,7 +27,7 @@ func legacyArgs(cmd *Command, args []string) error {
 // NoArgs returns an error if any args are included.
 func NoArgs(cmd *Command, args []string) error {
 	if len(args) > 0 {
-		return fmt.Errorf("unknown command %q for %q", args[0], cmd.CommandPath())
+		return fmt.Errorf("unknown command %q", args[0])
 	}
 	return nil
 }
@@ -44,7 +44,7 @@ func OnlyValidArgs(cmd *Command, args []string) error {
 
 		for _, v := range args {
 			if !stringInSlice(v, validArgs) {
-				return fmt.Errorf("invalid argument %q for %q%s", v, cmd.CommandPath(), cmd.findSuggestions(args[0]))
+				return fmt.Errorf("invalid argument %q %s", v, cmd.findSuggestions(args[0]))
 			}
 		}
 	}
