@@ -1233,6 +1233,7 @@ func (c *Command) UseLine() string {
 	} else {
 		useline = c.Use
 	}
+	useline = c.Use
 	if c.DisableFlagsInUseLine {
 		return useline
 	}
