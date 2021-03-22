@@ -482,9 +482,10 @@ func (c *Command) UsageTemplate() string {
 	if c.HasParent() {
 		return c.parent.UsageTemplate()
 	}
-	return `Usage:{{if .HasAvailableSubCommands}}
+	return `Usage:{{if .Runnable}}
+  {{.UseLine}}{{end}}{{if .HasAvailableSubCommands}}
   [command]{{end}}{{if gt (len .Aliases) 0}}
-
+		
 Aliases:
   {{.NameAndAliases}}{{end}}{{if .HasExample}}
 
